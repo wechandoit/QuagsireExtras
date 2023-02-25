@@ -19,6 +19,7 @@ import java.time.OffsetDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicIntegerArray;
 
 @Environment(EnvType.CLIENT)
 public class QuagsireClient implements ClientModInitializer {
@@ -114,7 +115,7 @@ public class QuagsireClient implements ClientModInitializer {
         if (world.isClient) {
             ClientPlayerEntity player = client.player;
             int startX = ((player.getChunkPos().x + 1) * 16) - 1, startY = Math.max(-64, player.getBlockY()-1), startZ = player.getChunkPos().z * 16;
-            List<AtomicInteger> cropCounts = Arrays.asList(new AtomicInteger[6]);
+            AtomicIntegerArray cropCounts = new AtomicIntegerArray(6);
 
             for (int y = startY; y < Math.min(320, player.getBlockY() + 1) + 1; y++) {
                 for (int x = startX; x > startX - 16; x--) {
@@ -124,43 +125,43 @@ public class QuagsireClient implements ClientModInitializer {
                             // cabbage
                             if (state.get(TripwireBlock.NORTH) && state.get(TripwireBlock.SOUTH) &&
                                     !(state.get(TripwireBlock.EAST) || state.get(TripwireBlock.WEST) || state.get(TripwireBlock.ATTACHED) || state.get(TripwireBlock.DISARMED) || state.get(TripwireBlock.POWERED))) {
-                                cropCounts.get(0).incrementAndGet();
+                                cropCounts.incrementAndGet(0);
                             }
                             // tomato
                             if (state.get(TripwireBlock.NORTH) && state.get(TripwireBlock.SOUTH) && state.get(TripwireBlock.DISARMED) &&
                                     !(state.get(TripwireBlock.EAST) || state.get(TripwireBlock.WEST) || state.get(TripwireBlock.ATTACHED) || state.get(TripwireBlock.POWERED))) {
-                                cropCounts.get(1).incrementAndGet();
+                                cropCounts.incrementAndGet(1);
                             }
                             // pepper
-                            if (state.get(TripwireBlock.WEST) && state.get(TripwireBlock.SOUTH) && state.get(TripwireBlock.DISARMED) && state.get(TripwireBlock.POWERED) && state.get(TripwireBlock.NORTH) &&
-                                    !(state.get(TripwireBlock.EAST) || state.get(TripwireBlock.ATTACHED))) {
-                                cropCounts.get(2).incrementAndGet();
+                            if (state.get(TripwireBlock.WEST) && state.get(TripwireBlock.SOUTH) && state.get(TripwireBlock.DISARMED) && state.get(TripwireBlock.POWERED) &&
+                                    !(state.get(TripwireBlock.EAST) || state.get(TripwireBlock.ATTACHED) || state.get(TripwireBlock.NORTH))) {
+                                cropCounts.incrementAndGet(2);
                             }
                             // corn
                             if (state.get(TripwireBlock.WEST) && state.get(TripwireBlock.SOUTH) &&
                                     !(state.get(TripwireBlock.EAST) || state.get(TripwireBlock.NORTH) || state.get(TripwireBlock.ATTACHED) || state.get(TripwireBlock.DISARMED) || state.get(TripwireBlock.POWERED))) {
-                                cropCounts.get(3).incrementAndGet();
+                                cropCounts.incrementAndGet(3);
                             }
                             // grape
                             if (state.get(TripwireBlock.DISARMED) && state.get(TripwireBlock.WEST) &&
                                     !(state.get(TripwireBlock.EAST) || state.get(TripwireBlock.NORTH) || state.get(TripwireBlock.ATTACHED) || state.get(TripwireBlock.SOUTH) || state.get(TripwireBlock.POWERED))) {
-                                cropCounts.get(4).incrementAndGet();
+                                cropCounts.incrementAndGet(4);
                             }
                             // garlic
                             if (state.get(TripwireBlock.NORTH) && state.get(TripwireBlock.DISARMED) &&
                                     !(state.get(TripwireBlock.EAST) || state.get(TripwireBlock.WEST) || state.get(TripwireBlock.ATTACHED) || state.get(TripwireBlock.SOUTH) || state.get(TripwireBlock.POWERED))) {
-                                cropCounts.get(5).incrementAndGet();
+                                cropCounts.incrementAndGet(5);
                             }
                         }
                     }
                 }
             }
-            fullyGrownCabbageCount = cropCounts.get(0).get();
-            fullyGrownTomatoCount = cropCounts.get(1).get();
-            fullyGrownPepperCount = cropCounts.get(2).get();
-            fullyGrownCornCount = cropCounts.get(3).get();
-            fullyGrownGrapeCount = cropCounts.get(4).get();
-            fullyGrownGarlicCount = cropCounts.get(5).get();
+            fullyGrownCabbageCount = cropCounts.get(0);
+            fullyGrownTomatoCount = cropCounts.get(1);
+            fullyGrownPepperCount = cropCounts.get(2);
+            fullyGrownCornCount = cropCounts.get(3);
+            fullyGrownGrapeCount = cropCounts.get(4);
+            fullyGrownGarlicCount = cropCounts.get(5);
         }
     }
 
