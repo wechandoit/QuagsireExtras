@@ -55,7 +55,9 @@ public abstract class DisplayEffectsScreenMixin<T extends ScreenHandler> extends
             List<StatusEffectInstance> statusEffects = new ArrayList<>(Ordering.natural().sortedCopy(collection).stream().toList());
 
             // add dummy icons
-            statusEffects.add(0, new DummyEffectInstance(COINS, "Inventory Value", format.format(MiscUtils.getTotalPriceOfClientPlayer())));
+            if (QuagsireClient.onEtherealSkies()) {
+                statusEffects.add(0, new DummyEffectInstance(COINS, "Inventory Value", format.format(MiscUtils.getTotalPriceOfClientPlayer())));
+            }
 
             int statusHeight = y;
             for (StatusEffectInstance instance : statusEffects) {

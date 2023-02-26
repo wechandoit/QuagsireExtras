@@ -6,11 +6,12 @@
   "mixins": [
   ],
   "client": [
-    "DisplayEffectsScreenMixin",
-    "ItemRenderMixin",
-    "HudRenderMixin",
-    "ParticleSpawnMixin",
     "BossBarHudMixin",
+    "ClientPlayNetworkHandlerMixin",
+    "DisplayEffectsScreenMixin",
+    "HudRenderMixin",
+    "ItemRenderMixin",
+    "ParticleSpawnMixin",
     "WorldRendererMixin"
   ],
   "injectors": {

@@ -16,9 +16,6 @@ import net.minecraft.world.World;
 import net.wechandoit.etherealaddons.utils.DiscordUtils;
 
 import java.time.OffsetDateTime;
-import java.util.Arrays;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicIntegerArray;
 
 @Environment(EnvType.CLIENT)
