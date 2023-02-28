@@ -40,6 +40,16 @@ public class MiscUtils {
         return -1;
     }
 
+    public static int getMaxGrappleGunUses(ItemStack stack) {
+        if (isGrappleGun(stack)) {
+            NbtCompound compound = stack.getNbt().getCompound("PublicBukkitValues");
+            String type =  compound.getString("grapplinghook:id");
+            if (type.equals("grapple_gun")) return 100;
+            else if (type.equals("grapple_gun2")) return 1000;
+        }
+        return -1;
+    }
+
     public static boolean isSellable(ItemStack stack) {
         if (stack != null && stack.hasNbt()) {
             return stack.getNbt().get("Price") != null;

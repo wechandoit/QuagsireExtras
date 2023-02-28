@@ -25,7 +25,8 @@ public class ItemRenderUtils {
             }
         } else if (MiscUtils.isGrappleGun(itemStack)) {
             int amount = MiscUtils.getGrappleGunUses(itemStack);
-            ItemRenderUtils.renderItemBarOnItemStack(x, y, amount, 100, 0, 255, 0);
+            int max = MiscUtils.getMaxGrappleGunUses(itemStack);
+            ItemRenderUtils.renderItemBarOnItemStack(x, y, amount, max, 0, 255, 0);
         }
     }
 
