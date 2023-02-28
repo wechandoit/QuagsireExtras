@@ -29,7 +29,6 @@ public class QuagsireClient implements ClientModInitializer {
     private static String previousIP = "";
     public static String location = "";
     public static int playerLevel = 0;
-    public static boolean onIsland = false;
 
     public static String season = "";
     public static int day = -1;
@@ -58,12 +57,16 @@ public class QuagsireClient implements ClientModInitializer {
         return !client.isInSingleplayer() && client.getCurrentServerEntry().address.contains("etherealskies.com");
     }
 
+    public static boolean onIsland() {
+        return onEtherealSkies() && location.equals("On Island");
+    }
+
     public void runnableRunner() {
         clientTick++;
 
         if (clientTick > 20) {
             clientTick = 1;
-            if (onEtherealSkies() && onIsland) {
+            if (onEtherealSkies() && onIsland()) {
                 countCrops(client.player.getWorld());
             }
         }

@@ -73,7 +73,7 @@ public class HudRenderMixin extends DrawableHelper {
         StatusEffectSpriteManager statusEffectSpriteManager = client.getStatusEffectSpriteManager();
         List<StatusEffectInstance> statusEffects = new ArrayList<>(Ordering.natural().sortedCopy(client.player.getStatusEffects()).stream().toList());
         // test add custom icon
-        if (QuagsireClient.onEtherealSkies() && QuagsireClient.onIsland) {
+        if (QuagsireClient.onEtherealSkies() && QuagsireClient.onIsland()) {
             statusEffects.add(0, new DummyEffectInstance(CABBAGE, QuagsireClient.fullyGrownCabbageCount));
             statusEffects.add(1, new DummyEffectInstance(TOMATO, QuagsireClient.fullyGrownTomatoCount));
             statusEffects.add(2, new DummyEffectInstance(PEPPER, QuagsireClient.fullyGrownPepperCount));

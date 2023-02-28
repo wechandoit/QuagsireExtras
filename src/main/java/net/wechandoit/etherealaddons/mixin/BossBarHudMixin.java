@@ -23,25 +23,18 @@ public class BossBarHudMixin {
 
         if (bossbar_unparsed.contains("Ethereal Island")) {
             QuagsireClient.location = "Spawn";
-            QuagsireClient.onIsland = false;
         } else if (bossbar_unparsed.contains("Island")) {
             QuagsireClient.location = "On Island";
-            QuagsireClient.onIsland = true;
         } else if (bossbar_unparsed.contains("The Golden Woods")) {
             QuagsireClient.location = "The Golden Woods";
-            QuagsireClient.onIsland = false;
         } else if (bossbar_unparsed.contains("The Forest Ruins")) {
             QuagsireClient.location = "The Forest Ruins";
-            QuagsireClient.onIsland = false;
         } else if (bossbar_unparsed.contains("The Shifting Sands")) {
             QuagsireClient.location = "The Shifting Sands";
-            QuagsireClient.onIsland = false;
         } else if (bossbar_unparsed.contains("The Underworld Fortress")) {
             QuagsireClient.location = "The Underworld Fortress";
-            QuagsireClient.onIsland = false;
         } else if (bossbar_unparsed.contains("The High Heavens")) {
             QuagsireClient.location = "The High Heavens";
-            QuagsireClient.onIsland = false;
         }
 
         if (bossbar_split.length == 9) {
