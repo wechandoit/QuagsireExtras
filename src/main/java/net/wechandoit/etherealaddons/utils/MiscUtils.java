@@ -111,6 +111,29 @@ public class MiscUtils {
         };
     }
 
+    public static boolean isCloudyGem(ItemStack stack) {
+        if (stack != null && stack.hasCustomName()) {
+            return stack.getName().getString().contains("Cloudy Gem");
+        }
+        return false;
+    }
+
+    public static boolean isMaxedCloudlyGem(ItemStack stack) {
+        if (isCloudyGem(stack)) {
+            return stack.getName().getString().contains("(Ready)");
+        }
+        return false;
+    }
+
+    public static int getGemSouls(ItemStack stack) {
+        if (isCloudyGem(stack)) {
+            NbtCompound compound = stack.getNbt().getCompound("MissionPouches");
+            NbtCompound progressCompound = compound.getCompound("Progress");
+            return (int) progressCompound.getLong("chargeGem");
+        }
+        return -1;
+    }
+
     public enum WEAPON_TIER {
         NULL, COMMON, RARE, EPIC, LEGENDARY, PRISMATIC, ANCIENT, EVENT
     }

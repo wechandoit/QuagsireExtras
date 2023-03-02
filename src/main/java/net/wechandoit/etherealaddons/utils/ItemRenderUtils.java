@@ -6,6 +6,7 @@ import net.minecraft.client.render.*;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.MathHelper;
 import net.wechandoit.etherealaddons.QuagsireClient;
 
 public class ItemRenderUtils {
@@ -27,6 +28,13 @@ public class ItemRenderUtils {
             int amount = MiscUtils.getGrappleGunUses(itemStack);
             int max = MiscUtils.getMaxGrappleGunUses(itemStack);
             ItemRenderUtils.renderItemBarOnItemStack(x, y, amount, max, 0, 255, 0);
+        } else if (MiscUtils.isCloudyGem(itemStack)) {
+            if (MiscUtils.isMaxedCloudlyGem(itemStack)) {
+                ItemRenderUtils.renderItemBarOnItemStack(x, y, 50, 50, 152, 127, 250);
+            } else {
+                int amount = MiscUtils.getGemSouls(itemStack);
+                ItemRenderUtils.renderItemBarOnItemStack(x, y, amount, 50, 80, 38, 247);
+            }
         }
     }
 
@@ -79,6 +87,19 @@ public class ItemRenderUtils {
         RenderSystem.enableTexture();
         RenderSystem.enableDepthTest();
     }
+
+    public static void renderHighlight(float ratio, int x, int y, int r, int g, int b, int a) {
+        RenderSystem.disableDepthTest();
+        RenderSystem.disableTexture();
+        RenderSystem.enableBlend();
+        RenderSystem.defaultBlendFunc();
+        Tessellator tessellator2 = Tessellator.getInstance();
+        BufferBuilder bufferBuilder2 = tessellator2.getBuffer();
+        renderGuiQuad(bufferBuilder2, x, y + MathHelper.floor(16.0F * (1.0F - ratio)), 16, MathHelper.ceil(16.0F * ratio), RGBA(r, g, b, a));
+        RenderSystem.enableTexture();
+        RenderSystem.enableDepthTest();
+    }
+
 
     public static int RGBA(int r, int g, int b, int a) {
         return (a << 24) | ((r & 255) << 16) | ((g & 255) << 8) | (b & 255);
